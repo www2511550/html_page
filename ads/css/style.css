@@ -1,0 +1,40 @@
+
+*{
+	padding: 0;margin: 0;
+}
+
+
+
+
+/*头部区块样式*/
+.header_out{
+	width: 990px;height: auto;margin: 0 auto;border: 1px solid red;position: relative;
+}
+.top_out{
+	width: 100%;height: 50px;background-color: #dedede;
+}
+.top_left{
+	padding-left: 50px;display: inline-block;line-height: 50px;font-size: 13px;
+}
+a.collect{
+	display: inline-block;float: right;line-height: 50px;text-decoration: none;padding-right: 25px;
+}
+.logo_out{
+	width: 100%;height: 120px;background-color: #333;
+}
+
+
+/*头部区块样式结束*/
+/*中间内容区块样式*/
+.content_out{
+	width: 990px;height: 400px;margin: 35px auto;border: 1px solid red;position: relative;
+}
+
+
+/*中间内容区块样式结束*/
+/*底部区块样式*/
+.bottom_out{
+	width: 990px;height: 225px;margin: 0 auto;border: 1px solid red;position: relative;
+}
+/*底部区块样式结束*/
+
