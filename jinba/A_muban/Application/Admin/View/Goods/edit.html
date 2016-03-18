@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品添加</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.box{
+			margin: 20px auto;width: 550px;height: auto;border: 1px solid red;
+		}
+		.box>table{
+			margin: 0 auto;
+		}
+		.title_input{
+			width: 450px;height: 22px;line-height: 22px;
+		}
+	</style>
+</head>
+<body>
+
+<form action="" method="post"  enctype="multipart/form-data">
+
+<div class="box">
+
+	<table border="1">
+		<thead>
+			<tr style="text-align:center">
+				<td colspan="2">编辑商品<input type="hidden" name="gid" value="{$data.gid}"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th class="title">商品标题</th>
+				<td class="txt"><input type="text" name="title" class="title_input" value="{$data.title}"></td>
+			</tr>
+			<tr>
+				<th class="title">图片地址</th>
+				<td class="txt"><img src="__ROOT__/{$data.img_path}" alt="" style="height:200px;"><input type="file" name="img_path" ></td>
+			</tr>
+			<tr>
+				<th class="title">最新价格</th>
+				<td class="txt"><input type="text" name="new_price" value="{$data.new_price}"></td>
+			</tr>
+			<tr>
+				<th class="title">原价</th>
+				<td class="txt"><input type="text" name="old_price" value="{$data.old_price}"></td>
+			</tr>
+			<tr>
+				<th class="title" style='height:50px;'>跳转地址</th>
+				<td class="txt">
+				   	<textarea name="href_path" id="href_input" cols="50" rows="5">
+				   		<?php echo json_decode($data['href_path']); ?>
+				   	</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th class="title">是否展示</th>
+				<td class="txt">
+					<label><input type="radio" name="is_display" value="1" <if condition="$data.is_display">checked=""</if> />上架</label>
+					<label><input type="radio" name="is_display" value="0" <if condition="$data.is_display eq 0">checked=""</if> />下架</label>
+					
+					
+					
+				</td>
+			</tr>
+			<tr>
+				<th class="title">预计返现</th>
+				<td class="txt"><input type="text" name="money" value="{$data.money}"></td>
+			</tr>
+			<tr>
+				<th class="title">排序</th>
+				<td class="txt"><input type="text" name="sort" value="{$data.sort}"></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input type="submit" value="提交修改" class="hd-success">
+</div>
+</form>
+
+	
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品添加</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.box{
+			margin: 20px auto;width: 100%;height: 100%;border: 1px solid red;
+		}
+		table{margin: 0 auto;}
+		tr,th,td{text-align: center;}
+	</style>
+</head>
+<body>
+
+<div class="box">
+
+	<table border="1">
+		<tr>
+			<th>品牌ID</th>
+			<th>品牌名称</th>
+			<th>logo</th>
+			<th>排序</th>
+			<th>状态</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+		
+	<volist name='data' id='vo'>
+		<tr>
+			<td>{$vo.bid}</td>
+			<td>{$vo.b_name}</td>
+			<td><img src="__ROOT__/{$vo.b_img}" alt=""></td>
+			<td>{$vo.b_sort}</td>
+			<td>{$vo.b_status}</td>
+			<td>{:date('Y-m-d H:i:s',$vo['addtime'])}</td>
+			<td>
+				<a href="{:U('brand/edit',array('bid'=>$vo['bid']))}">编辑</a>
+				<a href="">回收站</a>
+			</td>
+		</tr>
+	</volist>
+		
+	</table>
+
+</div>
+	
+</body>
+</html>

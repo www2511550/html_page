@@ -1,0 +1,20 @@
+<?php foreach ($data as $k => $val) {  ?>
+			
+			<div class="one_out">
+				<div class="one_img"><a href="<?php echo $val['detail_url'] ?>"><img src="<?php echo $val['g_icon']; ?>" alt=""></a></div>
+				<p class="title">
+					<span>[<?php $val['is_free_trans'] ? "包邮" : ''; ?>]</span>
+					<a href="<?php echo $val['detail_url'] ?>"><?php echo $val['g_title']; ?></a>
+				</p>
+				<div class="price">
+					<p class="new_price">
+						<b>￥</b><span><?php echo $val['new_price']; ?></span>
+					</p>
+					<p class="old_price">
+						<span>￥ <?php echo $val['old_price']; ?> </span>
+					</p>
+					<a href="<?php echo $val['detail_url'] ?>" class="buy">去看看</a>
+				</div>
+			</div>
+
+<?php } ?>

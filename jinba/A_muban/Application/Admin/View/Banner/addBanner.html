@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品添加</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.box{
+			margin: 20px auto;width: 550px;height: 500px;border: 1px solid red;
+		}
+		.box>table{
+			margin: 0 auto;
+		}
+		.title_input{
+			width: 450px;height: 22px;line-height: 22px;
+		}
+	</style>
+</head>
+<body>
+
+<form action="" method="post" >
+
+<div class="box">
+
+	<table border="1">
+		<thead>
+			<tr style="text-align:center">
+				<td colspan="2">Banner添加</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th class="title">Banner名称</th>
+				<td class="txt"><input type="text" name="b_name" class="title_input"></td>
+			</tr>
+			<tr>
+				<th class="title">Banner图片地址</th>
+				<td class="txt">
+				   	<textarea name="b_img_path" id="href_input" cols="50" rows="2"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th class="title" style='height:50px;'>跳转地址</th>
+				<td class="txt">
+				   	<textarea name="b_href" id="href_input" cols="50" rows="5"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th class="title">排序</th>
+				<td class="txt"><input type="text" name="b_sort"></td>
+			</tr>
+			<tr>
+				<th class="title">是否展示</th>
+				<td class="txt">
+					<label><input type="radio" name="b_status" value="1"  checked="" />上架</label>
+					<label><input type="radio" name="b_status" value="0" />下架</label>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input type="submit" value="提交" class="hd-success">
+</div>
+</form>
+
+	
+</body>
+</html>
