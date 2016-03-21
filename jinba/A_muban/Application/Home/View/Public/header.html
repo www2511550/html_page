@@ -2,7 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>御泥坊</title>
+<title>{$config.w_title}</title>
+<meta name="keywords" content="{$config.w_keywords}" />
+<meta name="description" content="{$config.w_description}"/>
+<meta name="copyright" content="jinbagw.com"/>
+<meta name="og:description" content="{$config.w_description}"/>
 <link href="__PUBLIC__/css/styles.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/jquery-ui.js"></script>
@@ -10,18 +14,27 @@
 <link href="__PUBLIC__/css/carousel.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<div class="into_out">
+  <div class="into">
+    <img src="__PUBLIC__/images/into.png" alt="" />
+    <a href="">进入官网</a>
+  </div>
+</div>
+<!-- into_out -->
+
 <div class="header-wrap">
   <div class="header">
     <div class="logo">
-      <h1>御泥坊</h1>
+      <h1>{$config.w_name}</h1>
     </div>
     <div class="menu">
       <ul>
-        <li><a href="__ROOT__" class="active">首页</a></li>
-        <li><a href="{:U('index/lists')}">产品一 </a></li>
-        <li><a href="{:U('index/lists')}">产品二 </a></li>
-        <li><a href="{:U('index/lists')}">产品三 </a></li>
-        <li><a href="{:U('index/lists')}">产品四 </a></li>
+        <li><a href="__ROOT__" <if condition="!I('get.cid')" >class="active"</if> >首页</a></li>
+
+      <volist name="cateData" id="vo" >
+        <li><a href="{:U('index/lists',array('cid'=>$vo['cid']))}" <if condition="I('get.cid') eq $vo['cid']" >class="active"</if>>{$vo.c_name}</a></li>
+      </volist> 
+        
       </ul>
     </div>
   </div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品添加</title>
+	<style>
+		*{padding: 0;margin: 0;}
+		.box{
+			margin: 20px auto;width: 550px;height: 500px;border: 1px solid red;
+		}
+		.box>table{
+			margin: 0 auto;
+		}
+		.title_input{
+			width: 450px;height: 22px;line-height: 22px;
+		}
+	</style>
+</head>
+<body>
+
+<form action="" method="post" >
+
+<div class="box">
+
+	<table border="1">
+		<thead>
+			<tr style="text-align:center">
+				<td colspan="2">添加新闻</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th class="title">新闻标题</th>
+				<td class="txt"><input type="text" name="n_title" class="title_input"></td>
+			</tr>
+			<tr>
+				<th class="title">新闻内容</th>
+				<td class="txt">
+				   	<textarea name="n_content" id="href_input" cols="50" rows="2"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th class="title">类型</th>
+				<td class="txt">
+					<select name="n_type" id="">
+						<option value="0">新闻</option>
+						<option value="1">话题</option>
+						<option value="2">文章</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="title">标签</th>
+				<td class="txt"><input type="text" name="n_tag" class="title_input"></td>
+			</tr>
+			<tr>
+				<th class="title">排序</th>
+				<td class="txt"><input type="text" name="n_sort" value='0'></td>
+			</tr>
+			<tr>
+				<th class="title">是否展示</th>
+				<td class="txt">
+					<label><input type="radio" name="n_status" value="1"  checked="" />上架</label>
+					<label><input type="radio" name="n_status" value="0" />下架</label>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input type="submit" value="提交" class="hd-success">
+</div>
+</form>
+
+	
+</body>
+</html>

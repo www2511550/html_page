@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>后台模板管理系统</title>
 <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/adminstyle.css" />
-<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/menu.js"></script>
 </head>
 
@@ -25,7 +25,7 @@
 <div id="content">
 	<div class="left_menu">
 				<ul id="nav_dot">
-      <li>
+      	<li>
           <h4 class="M1"><span></span><b>Banner与品牌</b></h4>
           <div class="list-item none">
             <a href="{:U('brand/index')}" target="mainFrame">品牌列表</a>
@@ -40,6 +40,13 @@
             <a href="{:U('goodsList')}" target="mainFrame">商品列表</a> 
             <a href="{:U('addGoods')}" target="mainFrame">添加商品</a>
             <a href="{:U('importGoods')}" target="mainFrame">批量导入</a>      
+           </div>
+        </li>
+        <li>
+          <h4 class="M2"><span></span><b>新闻管理</b></h4>
+          <div class="list-item none">
+            <a href="{:U('news/index')}" target="mainFrame">新闻列表</a> 
+            <a href="{:U('news/add')}" target="mainFrame">添加新闻</a>    
            </div>
         </li>
   </ul>

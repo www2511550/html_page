@@ -1,0 +1,34 @@
+
+<include file='Public:header' />
+<!---header-wrap-end-->
+
+<div class="page  mar-top30">
+  <div class="primary-col">
+    <div class="generic bdr-bottom-none">
+      <div class=" panel">
+        <div class="title">
+          <h1>{$_GET['title']}</h1>
+        </div>
+
+      <volist name='moreNews' id='vo' key='k'>  
+        <div class="content <if condition="$k">mar-top30</if>" >
+          <h2>{$vo.n_title}</h2>
+          <p>{$vo.n_content}</p>
+        </div>
+      </volist>
+        
+      </div>
+    </div>
+    <div class="clearing"></div>
+  </div>
+  <!---primary-col-->
+
+  <!-- 右侧新闻区块 -->
+  <include file="Public:right" />
+  <!---side-bar-->
+  <div class="clearing"></div>
+</div>
+<!---page-->
+
+<!-- 底部区块 -->
+<include file="Public:footer" />

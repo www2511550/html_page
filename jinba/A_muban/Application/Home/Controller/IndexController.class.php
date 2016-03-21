@@ -5,6 +5,32 @@ use Think\Controller;
 
 class IndexController extends Controller
 {
+    private $newsModel;
+    public function __construct(){
+        parent::__construct();
+        // 配置数据
+        $config = M('config')->select();
+        if ($config) {
+            foreach ($config as $val) {
+                $configData[$val['name']] = $val['value'];
+            }
+            $this->assign('config',$configData);
+        }  
+        // 菜单栏数据
+        $map['c_status'] = 1;
+        $map['c_position'] = 2;
+        $cateData = M('category')->field('cid,c_name')->where($map)->select();
+        $this->assign('cateData',$cateData);
+        // 右侧底部热卖图片
+        $maps['cid'] = 5;
+        $hotGoods = M('goods')->where($maps)->order($order)->limit(5)->select();
+        $this->assign('hotGoods',$hotGoods);
+        // 劲霸热点新闻,话题
+        $this->newsModel = M('news');
+        $hotNews = $this->newsModel->field('id,n_title')->where('n_type=0')->limit(8)->select();
+        $words = $this->newsModel->field('id,n_title,n_tag')->where('n_type=1')->limit(10)->select();
+        $this->assign(array('hotNews'=>$hotNews,'words'=>$words));
+    }
     /**
      * 首页展示
      * 
@@ -13,50 +39,18 @@ class IndexController extends Controller
      */
     public function index()
     {
-        // 分类模型
-        $categoryModel = M('category');
         // 商品模型
         $goodsModel = M('goods');
-        // 品牌模型
-        $brandModel = M('brand');
-        // banner模型
-        $bannerModel = M('banner');
-        // 获取首页分类数据
-        $map['c_position'] = array('IN',array(1,2,3,4,5));
-        $map['c_status'] = 1;
-        $cateNames = $categoryModel->field('c_name,cid,c_position')->where($map)->select();
-        // 位置分类
-        $nameData = array();
-        foreach ($cateNames as $val){
-            $nameData[$val['c_position']][] = $val;
-        }
-        // 获取位置分类对应数据
-        foreach ($nameData as $k => $val) {
-            foreach ($val as $key => $value) {
-                $m['cid'] = $value['cid'];
-                $m['is_display'] = 1;
-                $value['list'] = $goodsModel->where($m)->order('gid DESC')->limit(6)->select();
-                $nameData[$k][$key] = $value;
-            }    
-        }
-        // 导航菜单
-        $maps['c_position'] = array('IN',array(6,7,8,9));
-        $maps['c_status'] = 1;
-        $menus = $categoryModel->where($maps)->select();
-        // 获取首页品牌数据
-        $brandMap['b_status'] = 1;
-        $brandData = $brandModel->where($brandMap)->limit('18')->select();
-        // 获取美美哒数据
-        $mmMap['is_display'] = 1;
-        $mmMap['cid'] = 6;
-        $mmData = $goodsModel->where($mmMap)->order('money desc')->limit(14)->select();
-        // 首页banner数据
-        $bannerMap['b_status'] =1;
-        $bannerData = $bannerModel->where($bannerMap)->order('b_sort desc,bid desc')->limit(4)->select();
+        // 首页商品图片 id->1,5
+        $map['is_display'] = 1;
+        $map['cid'] = 1;
+        $order = " gid desc ";
+        $indexGoods = $goodsModel->where($map)->order($order)->limit(8)->select();
+        // 首页劲霸文章
+        $article = $this->newsModel->where('n_type=2')->limit(10)->select();
 
-        $this->assign(array('brandData'=>$brandData,'mmData'=>$mmData,'bannerData'=>$bannerData));
-        $this->assign('nameData',$nameData);
-        $this->assign('action','index');
+        $this->assign('article',$article);
+        $this->assign('indexGoods',$indexGoods);
         $this->display();
     }
     /**
@@ -65,49 +59,21 @@ class IndexController extends Controller
      * @return 
      * @author cong.cheng <2016年2月23日 下午12:01:55>
      */
-    public function lists(){exit('aaa');
-        $this->display();die;
-
+    public function lists(){
         $cid = I('get.cid');
-        $sort = I('get.sort');
-        // 商品模型 
+        if (!$cid) {
+            $this->error('不存在此分类商品！');
+        }
         $goodsModel = M('goods');
-        // 分类模型
-        $categoryModel = M('category');
-        $where['cid'] = $cid;
-        // 获取子分类对应数据
-        $mp['pid'] = $cid;
-        $cates = $categoryModel->where($mp)->select();
-        if ($cates) {
-            $cidArr = array();
-            foreach ($cates as $value) {
-                $cidArr[] = $value['cid'];
-            }
-            $where['cid'] = array('IN', $cidArr);
-        }
-        // 排序
-        switch ($sort) {
-            case '2':   // 价格排序
-                $order = 'new_price ASC';
-                break;
-            case '3':   // 上架时间
-                $order = 'addtime DESC';
-                break;
-            case '4':   // 收益
-                $order = 'money DESC';
-                break;
-            default:
-                $order = 'click_num desc,gid desc';
-                break;
-        }
-        // 分页获取数据
-        $count = $goodsModel->where($where)->count();
-        $pageSize = 16;
-        $Page = new \Think\Page($count,$pageSize);
-        $data = $goodsModel->where($where)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();
-        // 分页样式设置
-        // $Page->setConfig();
-        $this->assign('page',$Page->show());
+        // 对应列表数据
+        $map['is_display'] = 1;
+        $map['cid'] = $cid;
+        $order = " gid desc ";
+        $count = $goodsModel->where($map)->count();
+        $page = new \Think\Page($count,10);
+        $data = $goodsModel->where($map)->order($order)->limit($page->firstRow.','.$page->listRows)->select();
+
+        $this->assign('page',$page->show());
         $this->assign('data',$data);
         $this->display();
     }
@@ -138,7 +104,13 @@ class IndexController extends Controller
      * @author cong.cheng <2016年2月23日 下午12:02:05>
      */
     public function news(){
-        $this->assign('action','women');
+        $id = I('get.nid');
+        if (!$id) $this->error('不存在此新闻！');
+        $map['id'] = $id;
+        $map['n_status'] = 1;
+        $data = M('news')->where($map)->find();
+
+        $this->assign('data',$data);
         $this->display();
     }
     /**
@@ -147,8 +119,13 @@ class IndexController extends Controller
      * @return
      * @author cong.cheng <2016年2月23日 下午12:02:05>
      */
-    public function brand(){
-        $this->assign('action','collection');
+    public function moreNews(){
+        $type = I('get.type');
+        if ($type!=0 && !$type) $this->error('暂无此新闻！');
+        $map['n_type'] = $type;
+        $moreNews = $this->newsModel->where($map)->limit(10)->select();
+
+        $this->assign('moreNews',$moreNews);
         $this->display();
     }
     /**

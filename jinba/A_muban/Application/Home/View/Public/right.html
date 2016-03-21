@@ -3,18 +3,17 @@
     <div class="submenu">
       <div class="panel">
         <div class="title">
-          <h1>最热新闻<a href="" style='float:right;font-size:16px;'>>>更多</a></h1>
+          <h1>最热新闻<a href="{:U('index/moreNews',array('type'=>0))}" style='float:right;font-size:16px;'>>>更多</a></h1>
         </div>
         <div class="content"> <img src="__PUBLIC__/images/icon1.png" alt="icon"  class="float-left mar-right20"/>
-          <h2>御泥坊</h2>
+          <h2>{$config.w_list_title}</h2>
           <ul>
-            <li><a href="#" class="active">御泥坊红石榴鲜活矿物睡眠面膜180g</a></li>
 
-          <for start='0' end='9' name='vo'>  
-            <li><a href="{:U('index/news')}">御泥坊红石榴鲜活矿物睡眠面膜180g</a></li>
-          </for>
+          <volist name='hotNews' id='vo' key='k'>  
+            <li><a href="{:U('index/news',array('nid'=>$vo['id']))}" <if condition='!$k'>class="active"</if>
+              >{$vo.n_title}</a></li>
+          </volist>
 
-            <!-- <li class="-noborder-bottom"><a href="#">御泥坊红石榴鲜活矿物睡眠面膜180g</a></li> -->
           </ul>
         </div>
       </div>
@@ -23,33 +22,33 @@
     <div class="testimonnial">
       <div class="panel">
         <div class="title">
-          <h1>热点话题</h1>
+          <h1>热点话题<a href="{:U('index/moreNews',array('type'=>1))}" style='float:right;font-size:16px;'>>>更多</a></h1>
         </div>
         <div class="content"> <img src="__PUBLIC__/images/icon2.png" alt="icon"  class="float-left mar-right20"/>
-          <h2>红石榴鲜活矿物睡眠面膜</h2>
+          <h2>{$config.w_name}</h2>
         </div>
 
-    <for start='0' end='10' name='vo'>  
+    <volist name='words' id='vo'>  
         <div class="content">
-          <P>“ 御泥坊的面膜怎么样？ ”<br />
-            <span>御泥坊</span> / <a href="{:U('index/news')}">详情</a></P>
+          <P>“ {$vo.n_title} ”<br />
+            <span>{$vo.n_tag}</span> / <a href="{:U('index/news',array('nid'=>$vo['id']))}">详情</a></P>
         </div>
-    </for>
+    </volist>
 
       </div>
     </div>
     <div class="quick-contact bdr-bottom-none">
       <div class="panel">
         <div class="title">
-          <h1>热卖商品 <a href="" style='float:right;font-size:16px;'>>>更多</a></h1>
+          <h1>热卖商品 <a href="{:U('index/lists',array('cid'=>5))}" style='float:right;font-size:16px;'>>>更多</a></h1>
         </div>
 
-    <for start='0' end='6' name='vo'> 
+    <volist name="hotGoods" id="vo" > 
         <div class="content">
-          <a href=""><img src="__PUBLIC__/images/img2.jpg" alt='' /></a>
-          <h2>御泥坊红石榴鲜活矿物睡眠面膜</h2>
+          <a href=""><img width='120' height='120' src="__ROOT__/{$vo.min_img_path}" alt="{$vo.title}" /></a>
+          <h2>{$vo.title}</h2>
         </div>
-    </for>
+    </volist>
 
       </div>
     </div>
