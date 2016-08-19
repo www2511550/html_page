@@ -1,0 +1,42 @@
+*{padding: 0;margin: 0;};
+html{
+	font-family: "微软雅黑";
+}
+
+/*图片列表*/
+.photo_list_out{
+	width: 100%;max-width: 768px;margin: 0 auto;
+}
+.photo_list{
+	width: 100%;max-width:768px;margin: 0 auto;
+}
+.photo_list>li{
+	list-style: none;position: relative;
+}
+.photo_list>li>p{
+	position: absolute;left: 15px;bottom: 8%;line-height: 25px;font-size: 1.2rem;color: #fff;
+}
+.photo_list>li>a>img{
+	height: 249px;width: 100%;
+}
+
+
+
+
+
+.title{
+	font-size: 1.2em;
+	line-height: 1.5;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+.content_out{
+	line-height: 1.8;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 10px 15px 0;
+    font-size: 0.97em;
+    color: #333;
+}
